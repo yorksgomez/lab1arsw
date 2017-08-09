@@ -24,7 +24,7 @@ Para este ejercicio se quiere calcular, en el menor tiempo posible, y en una sol
 
 1. Cree una clase de tipo Thread que represente el ciclo de vida de un hilo que calcule una parte de los dígitos requeridos.
 2. Haga que la función PiDigits.getDigits() reciba como parámetro adicional un valor N, correspondiente al número de hilos entre los que se va a paralelizar la solución. Haga que dicha función espere hasta que los N hilos terminen de resolver el problema para combinar las respuestas y entonces retornar el resultado. Para esto, revise el método [join](https://docs.oracle.com/javase/tutorial/essential/concurrency/join.html) del API de concurrencia de Java.
-3. Ajuste las pruebas de JUnit, considerando los casos de usar 1 o 2 hilos.
+3. Ajuste las pruebas de JUnit, considerando los casos de usar 1, 2 o 3 hilos (este último para considerar un número impar de hilos!)
 
 
 **Parte III Evaluación de Desempeño**
