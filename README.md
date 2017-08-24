@@ -62,4 +62,7 @@ Con lo anterior, y con los tiempos de ejecución dados, haga una gráfica de tie
 	- La signatura del método original sólo fue modificada con el parámetro original, y en el mismo debe quedar encapsulado la paralelización e inicio de la solución, y la sincronización de la finalización de la misma.
 	- Las nuevas pruebas con sólo UN hilo deben ser exactamente iguales a las originales, variando sólo el parámetro adicional. Se incluyeron pruebas con hilos adicionales, y las mismas pasan.
 	- Se plantea un método eficiente para combinar los resultados en el orden correcto (iterar sobre cada resultado NO sera eficiente).
-	
+
+3. Análisis.
+	- Se deja evidencia de la realización de los experimentos.
+	- Los análisis realizados son consistentes.
