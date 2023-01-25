@@ -28,6 +28,20 @@ public class PiDigits {
         }
 
         byte[] digits = new byte[count];
+
+        return digits;
+    }
+    
+    public static byte[] getDigitsSection(int start, int count) {
+        if (start < 0) {
+            throw new RuntimeException("Invalid Interval");
+        }
+
+        if (count < 0) {
+            throw new RuntimeException("Invalid Interval");
+        }
+
+        byte[] digits = new byte[count];
         double sum = 0;
 
         for (int i = 0; i < count; i++) {
