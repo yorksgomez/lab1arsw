@@ -1,5 +1,7 @@
 package edu.eci.arsw.math;
 
+import java.util.ArrayList;
+
 ///  <summary>
 ///  An implementation of the Bailey-Borwein-Plouffe formula for calculating hexadecimal
 ///  digits of pi.
@@ -18,7 +20,7 @@ public class PiDigits {
      * @param count The number of digits to return
      * @return An array containing the hexadecimal digits.
      */
-    public static byte[] getDigits(int start, int count) {
+    public static byte[] getDigits(int start, int count, int threads) {
         if (start < 0) {
             throw new RuntimeException("Invalid Interval");
         }
@@ -28,6 +30,34 @@ public class PiDigits {
         }
 
         byte[] digits = new byte[count];
+		int threadLength = (count - start) / threads;
+		int lastThreadLength = threadLength + ((count - threads) % threads);
+		ArrayList<PIThread> pithreads = new ArrayList<>();
+		int currentStart = start, currentCount = threadLength;
+
+		for(int i = 0; i < threads; i++) {
+			if(i == threads - 1)
+				currentCount = lastThreadLength;
+			
+			PIThread pithread = new PIThread(currentStart, currentCount);
+			pithreads.add(pithread);
+			pithread.start();
+			
+			currentStart += currentCount;
+		}
+
+		/**
+			CODIGO PARA ESPERAR A QUE TERMINEN LOS THREADS
+		**/
+
+		for(int i = 0; i < threads; i++) {
+			if(i == threads - 1)
+				currentCount = lastThreadLength;
+			
+			PIThread pithread = pithreads.get(i);
+			digits[0] = pithread.getDigits();
+			
+		}
 
         return digits;
     }

@@ -13,6 +13,7 @@ import edu.eci.arsw.math.PiDigits;
 public class PIThread extends Thread {
 
     private final int start, end;
+	private byte[] digits;
     
     public PIThread(int start, int end) {
         this.start = start;
