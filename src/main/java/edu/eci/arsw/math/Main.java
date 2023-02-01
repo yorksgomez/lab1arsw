@@ -14,9 +14,13 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String a[]) {
-        System.out.println(bytesToHex(PiDigits.getDigits(0, 10)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 100)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 1000000)));
+        int cores = Runtime.getRuntime().availableProcessors();
+        
+        System.out.println("Number of cores is: " + cores);
+        
+        System.out.println(bytesToHex(PiDigits.getDigits(0, 10, 500)));
+        System.out.println(bytesToHex(PiDigits.getDigits(1, 100, 500)));
+        System.out.println(bytesToHex(PiDigits.getDigits(1, 100000, 200)));
     }
 
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();

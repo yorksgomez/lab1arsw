@@ -12,7 +12,7 @@ import edu.eci.arsw.math.PiDigits;
  */
 public class PIThread extends Thread {
 
-    private final int start, end;
+    private int start, end;
 	private byte[] digits;
     
     public PIThread(int start, int end) {
@@ -22,7 +22,7 @@ public class PIThread extends Thread {
     
     @Override
     public void run() {
-        PiDigits.getDigitsSection(start, end);
+        digits = PiDigits.getDigitsSection(start, end);
     }
     
     public byte[] getDigits() {

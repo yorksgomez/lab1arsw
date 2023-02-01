@@ -1,6 +1,7 @@
 package edu.eci.arsw.math;
 
 import java.util.ArrayList;
+import edu.eci.arsw.threads.PIThread;
 
 ///  <summary>
 ///  An implementation of the Bailey-Borwein-Plouffe formula for calculating hexadecimal
@@ -30,10 +31,12 @@ public class PiDigits {
         }
 
         byte[] digits = new byte[count];
-		int threadLength = (count - start) / threads;
-		int lastThreadLength = threadLength + ((count - threads) % threads);
+		int threadLength = count / threads;
+		int lastThreadLength = threadLength + (count % threads);
 		ArrayList<PIThread> pithreads = new ArrayList<>();
 		int currentStart = start, currentCount = threadLength;
+
+        
 
 		for(int i = 0; i < threads; i++) {
 			if(i == threads - 1)
@@ -46,17 +49,26 @@ public class PiDigits {
 			currentStart += currentCount;
 		}
 
-		/**
-			CODIGO PARA ESPERAR A QUE TERMINEN LOS THREADS
-		**/
+        try {
 
+            for (PIThread thread : pithreads)
+                thread.join();
+
+        } catch(InterruptedException exc) {
+            throw new RuntimeException("thread anormal interruption");
+        }
+
+        int j = 0;
 		for(int i = 0; i < threads; i++) {
 			if(i == threads - 1)
 				currentCount = lastThreadLength;
 			
 			PIThread pithread = pithreads.get(i);
-			digits[0] = pithread.getDigits();
-			
+			byte[] currentDigits = pithread.getDigits();
+
+            for(byte d : currentDigits)
+                digits[j++] = d;
+
 		}
 
         return digits;
